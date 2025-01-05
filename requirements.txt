@@ -1,0 +1,6 @@
+apache-airflow>=2.7.1
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+pandas>=2.1.0
+psycopg2-binary>=2.9.9
+pymongo
