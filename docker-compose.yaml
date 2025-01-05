@@ -181,6 +181,28 @@ services:
       retries: 5
     restart: always
 
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8000"
+    environment:
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB=fx_rates
+      - MONGO_USER=fx_user
+      - MONGO_PASSWORD=fx_password
+    depends_on:
+      mongodb:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+
 volumes:
   postgres-db-volume:
   mongodb-data:
